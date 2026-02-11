@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useCart } from '@/components/cart/CartContext';
-import { History, MapPin, Palette, ShoppingBag, Landmark } from 'lucide-react';
-import NotFound from '@/app/not-found';
+import { History, MapPin, Palette, ShoppingBag, Landmark, Compass } from 'lucide-react';
+import Link from 'next/link';
 
 export default function MunicipalityPage() {
   const { slug } = useParams();
@@ -41,13 +41,29 @@ export default function MunicipalityPage() {
             </TabsList>
             
             <TabsContent value="info" className="p-6 bg-white rounded-xl shadow-sm border mt-4">
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <section>
                   <h3 className="text-2xl font-headline font-bold text-secondary flex items-center gap-2 mb-4">
                     <History className="h-6 w-6" /> Historia
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">{muni.history}</p>
+                  <p className="text-muted-foreground leading-relaxed">{muni.history || "Municipio emblemático de Norte de Santander con una rica historia ligada al desarrollo del departamento."}</p>
                 </section>
+
+                {muni.corregimientos.length > 0 && (
+                  <section>
+                    <h3 className="text-2xl font-headline font-bold text-secondary flex items-center gap-2 mb-4">
+                      <Compass className="h-6 w-6" /> Corregimientos
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {muni.corregimientos.map((cor, i) => (
+                        <span key={i} className="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm font-medium">
+                          {cor}
+                        </span>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
                 <section>
                   <h3 className="text-2xl font-headline font-bold text-secondary flex items-center gap-2 mb-4">
                     <Landmark className="h-6 w-6" /> Datos Relevantes
@@ -61,59 +77,71 @@ export default function MunicipalityPage() {
             </TabsContent>
 
             <TabsContent value="spots" className="mt-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {muni.spots.map((spot, i) => (
-                  <Card key={i} className="overflow-hidden">
-                    <img src={spot.image} alt={spot.name} className="w-full h-40 object-cover" />
-                    <CardHeader>
-                      <CardTitle className="text-lg">{spot.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">{spot.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+              {muni.spots.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {muni.spots.map((spot, i) => (
+                    <Card key={i} className="overflow-hidden">
+                      <img src={spot.image} alt={spot.name} className="w-full h-40 object-cover" />
+                      <CardHeader>
+                        <CardTitle className="text-lg">{spot.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-muted-foreground">{spot.description}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-12 text-center text-muted-foreground bg-white rounded-xl border italic">
+                  Próximamente más sitios turísticos de {muni.name}.
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="culture" className="p-6 bg-white rounded-xl shadow-sm border mt-4">
               <h3 className="text-2xl font-headline font-bold text-secondary flex items-center gap-2 mb-6">
                 <Palette className="h-6 w-6" /> Tradiciones y Arte
               </h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {muni.culture.map((c, i) => (
-                  <li key={i} className="flex items-center gap-3 p-4 bg-primary/10 rounded-lg">
-                    <div className="h-2 w-2 rounded-full bg-secondary" />
-                    <span className="font-bold">{c}</span>
-                  </li>
-                ))}
-              </ul>
+              {muni.culture.length > 0 ? (
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {muni.culture.map((c, i) => (
+                    <li key={i} className="flex items-center gap-3 p-4 bg-primary/10 rounded-lg">
+                      <div className="h-2 w-2 rounded-full bg-secondary" />
+                      <span className="font-bold">{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-muted-foreground italic">Cultura y tradiciones locales por descubrir.</p>
+              )}
             </TabsContent>
           </Tabs>
 
           {/* Mini Store for this municipality */}
-          <section>
-            <h2 className="text-3xl font-headline font-bold text-secondary flex items-center gap-3 mb-8">
-              <ShoppingBag className="h-8 w-8" /> Productos de {muni.name}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {muni.products.map((product) => (
-                <Card key={product.id} className="flex gap-4 p-4 items-center">
-                  <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-                  </div>
-                  <div className="flex-grow">
-                    <h4 className="font-bold">{product.name}</h4>
-                    <p className="text-xs text-muted-foreground mb-2">{product.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-bold text-secondary">${product.price.toLocaleString()}</span>
-                      <Button size="sm" onClick={() => addToCart(product, 'product')}>Añadir</Button>
+          {muni.products.length > 0 && (
+            <section>
+              <h2 className="text-3xl font-headline font-bold text-secondary flex items-center gap-3 mb-8">
+                <ShoppingBag className="h-8 w-8" /> Productos de {muni.name}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {muni.products.map((product) => (
+                  <Card key={product.id} className="flex gap-4 p-4 items-center">
+                    <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                      <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                     </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </section>
+                    <div className="flex-grow">
+                      <h4 className="font-bold">{product.name}</h4>
+                      <p className="text-xs text-muted-foreground mb-2">{product.description}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-bold text-secondary">${product.price.toLocaleString()}</span>
+                        <Button size="sm" onClick={() => addToCart(product, 'product')}>Añadir</Button>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
         {/* Sidebar */}
@@ -142,5 +170,3 @@ export default function MunicipalityPage() {
     </div>
   );
 }
-
-import Link from 'next/link';

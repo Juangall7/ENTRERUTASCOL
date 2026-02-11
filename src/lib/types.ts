@@ -9,6 +9,7 @@ export interface Municipality {
   culture: string[];
   spots: TouristSpot[];
   products: Product[];
+  corregimientos: string[];
 }
 
 export interface TouristSpot {
