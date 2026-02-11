@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-cucuta",
+      "description": "Aerial view of Cucuta, Norte de Santander",
+      "imageUrl": "https://picsum.photos/seed/cucuta1/1200/600",
+      "imageHint": "cucuta city"
+    },
+    {
+      "id": "ocaña-colonial",
+      "description": "Colonial architecture in Ocaña",
+      "imageUrl": "https://images.unsplash.com/photo-1675809367669-0b5f9a77e370?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2xvbmlhbCUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3NzA3NDgwMzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "colonial architecture"
+    },
+    {
+      "id": "pamplona-cathedral",
+      "description": "The cathedral in Pamplona, Norte de Santander",
+      "imageUrl": "https://images.unsplash.com/photo-1755772469910-9c18ebc718e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwYW1wbG9uYSUyMGNhdGhlZHJhbHxlbnwwfHx8fDE3NzA3NzcxODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pamplona cathedral"
+    },
+    {
+      "id": "hiking-adventure",
+      "description": "Hiking in the mountains of Norte de Santander",
+      "imageUrl": "https://images.unsplash.com/photo-1615809265160-b1c0a0a4650a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxoaWtpbmclMjBtb3VudGFpbnN8ZW58MHx8fHwxNzcwNjcyNjk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "hiking mountains"
+    },
+    {
+      "id": "coffee-plantation",
+      "description": "Coffee plantation in Chinácota",
+      "imageUrl": "https://images.unsplash.com/photo-1648483880685-356ea43870c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjb2ZmZWUlMjBwbGFudGF0aW9ufGVufDB8fHx8MTc3MDc3NzE4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee plantation"
+    },
+    {
+      "id": "gastronomy-pasteles",
+      "description": "Traditional gastronomy from Norte de Santander",
+      "imageUrl": "https://images.unsplash.com/photo-1644753787064-9f2846d6c995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2xvbWJpYW4lMjBmb29kfGVufDB8fHx8MTc3MDc3NzE4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "colombian food"
+    },
+    {
+      "id": "artisan-crafts",
+      "description": "Local artisan crafts and pottery",
+      "imageUrl": "https://images.unsplash.com/photo-1766875127697-8e5d2004cde8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhcnRpc2FuJTIwcG90dGVyeXxlbnwwfHx8fDE3NzA3NzcxODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "artisan pottery"
+    }
+  ]
 }
