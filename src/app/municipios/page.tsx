@@ -16,7 +16,7 @@ export default function MunicipiosPage() {
       m.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       m.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       m.corregimientos.some(c => c.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
+    ).sort((a, b) => a.name.localeCompare(b.name));
   }, [searchTerm]);
 
   return (
